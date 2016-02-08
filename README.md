@@ -1,0 +1,1 @@
+# Sensor-Fotoresistivo-Detector-De-Intensidad-Luminosa
