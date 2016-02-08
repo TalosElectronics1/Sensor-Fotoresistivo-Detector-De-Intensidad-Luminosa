@@ -1,0 +1,30 @@
+//Declaracion de varibales
+int Sensor_LDR = 2;
+int luminosidad = 0;
+int Valor_digital_LDR = 0;
+
+void setup()
+{
+  Serial.begin(9600);    // Configura el puerto serie a 9600bps
+  pinMode(Sensor_LDR, INPUT);//Congigurar el pin 2 como entrada
+}
+
+void loop()
+{
+  luminosidad = analogRead(0);//Leer y guardar el valor analogico del sensor
+  Valor_digital_LDR = digitalRead(Sensor_LDR);//Leer y guardar el valor digital del sensor
+  Serial.println(luminosidad); // Muestra el valor analogico en el monitor serial
+  delay(200);     // Espera 200 ms
+  if (Valor_digital_LDR == 1)//Si el sensor detecta luminosidad baja
+  {
+    //Muestra en el monitor serial el siguiente mensaje
+    Serial.println("Advertencia la luminosidad esta por debajo de la deseada");
+    while (Valor_digital_LDR == 1) //Mientras detecte el sensor luminosidad baja
+      //seguira haciendo lectura de la luminosidad pero no la mostrara en el monitor serial
+      //Hasta que aumente la luminosidad
+    {
+      delay(100);
+      Valor_digital_LDR = digitalRead(Sensor_LDR);
+    }
+  }
+}
